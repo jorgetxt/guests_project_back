@@ -1,8 +1,7 @@
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './users/entities/user.entity';
 import { Auth } from './auth/entities/auth.entity';
-// import { User } from './users/entities/user.entity';
-// import { Card } from './cards/entities/card.entity';
+import { Guest } from './guests/entities/guest.entity';
 
 const conection = TypeOrmModule.forRoot({
   type: 'mysql',
@@ -11,7 +10,7 @@ const conection = TypeOrmModule.forRoot({
   username: 'root',
   password: '',
   database: 'guests_project',
-  entities: [User, Auth],
+  entities: [User, Auth, Guest],
   synchronize: true,
 });
 
