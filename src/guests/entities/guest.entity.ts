@@ -5,10 +5,13 @@ export class Guest {
   id: number;
 
   @Column()
-  date: string;
+  date: Date;
 
   @Column()
   hour: string;
+
+  @Column()
+  status: string;
 
   @Column()
   firstname: string;
@@ -20,7 +23,7 @@ export class Guest {
   cedula: string;
 
   @Column()
-  registerDate: string;
+  registerDate: Date;
 
   @Column()
   reason: string;
