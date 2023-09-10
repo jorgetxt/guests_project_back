@@ -12,7 +12,14 @@ import { GuestsService } from './guests.service';
 import { CreateGuestDto } from './dto/create-guest.dto';
 import { UpdateGuestDto } from './dto/update-guest.dto';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.strategy';
-import { ApiTags, ApiBearerAuth } from '@nestjs/swagger/dist/decorators';
+import {
+  ApiTags,
+  ApiBearerAuth,
+  ApiBody,
+  ApiOkResponse,
+} from '@nestjs/swagger/dist/decorators';
+import { bodyCreateSWG, okResponseCreateSWG } from './swagger/create.swagger';
+import { bodyUpdateSWG, okResponseUpdateSWG } from './swagger/update.swagger';
 
 @UseGuards(JwtAuthGuard)
 @ApiBearerAuth()
@@ -21,6 +28,8 @@ import { ApiTags, ApiBearerAuth } from '@nestjs/swagger/dist/decorators';
 export class GuestsController {
   constructor(private readonly guestsService: GuestsService) {}
 
+  @ApiBody(bodyCreateSWG)
+  @ApiOkResponse(okResponseCreateSWG)
   @Post()
   create(@Body() createGuestDto: CreateGuestDto) {
     return this.guestsService.create(createGuestDto);
@@ -36,6 +45,8 @@ export class GuestsController {
     return this.guestsService.findOne(+id);
   }
 
+  @ApiBody(bodyUpdateSWG)
+  @ApiOkResponse(okResponseUpdateSWG)
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateGuestDto: UpdateGuestDto) {
     return this.guestsService.update(+id, updateGuestDto);

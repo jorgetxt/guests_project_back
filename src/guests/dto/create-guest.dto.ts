@@ -26,7 +26,7 @@ export class CreateGuestDto {
   reason: string;
 
   @IsNotEmpty()
-  departament: string;
+  departamentId: string;
 
   @IsNotEmpty()
   note: string;

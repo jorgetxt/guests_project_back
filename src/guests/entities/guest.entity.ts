@@ -29,7 +29,7 @@ export class Guest {
   reason: string;
 
   @Column()
-  departament: string;
+  departamentId: string;
 
   @Column()
   note: string;
