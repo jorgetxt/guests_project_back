@@ -78,7 +78,7 @@ export class DepartmentsService {
     }
   }
 
-  remove(id: number) {
+  async remove(id: number) {
     const data = await this.departmentRepository.findOne({ where: { id } });
 
     if (!data) {
@@ -92,6 +92,5 @@ export class DepartmentsService {
       );
     }
     return this.departmentRepository.softRemove;
-  }
   }
 }

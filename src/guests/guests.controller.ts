@@ -12,8 +12,11 @@ import { GuestsService } from './guests.service';
 import { CreateGuestDto } from './dto/create-guest.dto';
 import { UpdateGuestDto } from './dto/update-guest.dto';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.strategy';
+import { ApiTags, ApiBearerAuth } from '@nestjs/swagger/dist/decorators';
 
 @UseGuards(JwtAuthGuard)
+@ApiBearerAuth()
+@ApiTags('Invitados')
 @Controller('guests')
 export class GuestsController {
   constructor(private readonly guestsService: GuestsService) {}

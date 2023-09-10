@@ -12,6 +12,7 @@ export class AuthService {
   constructor(
     @InjectRepository(User)
     private usersRepository: Repository<User>,
+
     private jwtService: JwtService,
   ) {}
 
@@ -25,7 +26,7 @@ export class AuthService {
     };
 
     const userExist = await this.usersRepository.findOne({
-      where: { username: registerObject.roll },
+      where: { username: registerObject.username },
     });
 
     if (!!userExist) {
@@ -40,7 +41,8 @@ export class AuthService {
     }
 
     try {
-      const data = this.usersRepository.save(registerObject);
+      const { password, ...data } =
+        await this.usersRepository.save(registerObject);
       return data;
     } catch (error) {
       throw new HttpException(
