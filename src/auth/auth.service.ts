@@ -58,13 +58,14 @@ export class AuthService {
   async login(loginObject: LoginAuthDto) {
     const { username, password } = loginObject;
 
-    const { password: passwordResponse, ...findUser } =
-      await this.usersRepository
-        .createQueryBuilder()
-        .addSelect('user.password AS User_password')
-        .where('user.username = :username', { username })
-        .select()
-        .getOne();
+    console.log(loginObject);
+
+    const findUser = await this.usersRepository
+      .createQueryBuilder()
+      .addSelect('user.password AS User_password')
+      .where('user.username = :username', { username })
+      .select()
+      .getOne();
 
     if (!findUser) {
       throw new HttpException(
@@ -77,7 +78,7 @@ export class AuthService {
       );
     }
 
-    const checkPass = await compare(password, passwordResponse);
+    const checkPass = await compare(password, findUser.password);
 
     if (!checkPass) {
       throw new HttpException(
@@ -94,7 +95,9 @@ export class AuthService {
 
     const token = this.jwtService.sign(payload);
 
-    const data = { user: findUser, token };
+    const { password: pass, ...dataOK } = findUser;
+
+    const data = { user: dataOK, token };
 
     return data;
   }
