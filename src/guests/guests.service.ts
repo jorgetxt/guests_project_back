@@ -4,15 +4,32 @@ import { UpdateGuestDto } from './dto/update-guest.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Guest } from './entities/guest.entity';
 import { Repository } from 'typeorm';
+import { Department } from 'src/departments/entities/department.entity';
 
 @Injectable()
 export class GuestsService {
   constructor(
     @InjectRepository(Guest)
     private guestRepository: Repository<Guest>,
+    @InjectRepository(Department)
+    private departmentRepository: Repository<Department>,
   ) {}
-  create(createGuestDto: CreateGuestDto) {
-    const data = this.guestRepository.create(createGuestDto);
+  async create(createGuestDto: CreateGuestDto) {
+    const department = await this.departmentRepository.findOne({
+      where: { id: createGuestDto.departmentId },
+    });
+
+    if (!department) {
+      throw new HttpException(
+        {
+          statusCode: HttpStatus.FORBIDDEN,
+          error: 'FORBIDDEN',
+          message: ['No se ha encontrado el departamento'],
+        },
+        HttpStatus.FORBIDDEN,
+      );
+    }
+    const data = this.guestRepository.create({ department, ...createGuestDto });
     return this.guestRepository.save(data);
   }
 

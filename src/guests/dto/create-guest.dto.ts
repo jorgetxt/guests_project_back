@@ -5,9 +5,6 @@ export class CreateGuestDto {
   date: Date;
 
   @IsNotEmpty()
-  hour: string;
-
-  @IsNotEmpty()
   status: string;
 
   @IsNotEmpty()
@@ -26,7 +23,7 @@ export class CreateGuestDto {
   reason: string;
 
   @IsNotEmpty()
-  departamentId: string;
+  departmentId: number;
 
   @IsNotEmpty()
   note: string;

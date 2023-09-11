@@ -1,14 +1,19 @@
-import { Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Department } from 'src/departments/entities/department.entity';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
+@Entity()
 export class Guest {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
   date: Date;
-
-  @Column()
-  hour: string;
 
   @Column()
   status: string;
@@ -28,8 +33,12 @@ export class Guest {
   @Column()
   reason: string;
 
-  @Column()
-  departamentId: string;
+  @ManyToOne(() => Department, (department) => department.guests, {
+    nullable: false,
+    cascade: true,
+  })
+  @JoinColumn({ name: 'departmentId' })
+  department: Department;
 
   @Column()
   note: string;
