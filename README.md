@@ -25,7 +25,22 @@
 ## Descripción
 La base de datos esta en los archivos como "guests_project.sql"
 
-Para configurar la conexión las credenciales y el nombre de la base de datos esta el archivo "src/dbConection.ts"
+Para configurar el puerto, las credenciales y el nombre de la base de datos está el archivo "src/dbConection.ts"
+
+Swagger:
+http://localhost:3000/documentation
+
+Credenciales: 
+- recepcion
+  "username": "Maria1",
+  "password": "12345"
+  
+- supervisor
+  "username": "Juan1",
+  "password": "12345"
+
+Abajo los pasos para la instalación del proyecto
+
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
