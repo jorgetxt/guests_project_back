@@ -39,6 +39,14 @@ Credenciales:
   "username": "Juan1",
   "password": "12345"
 
+Estructura del proyecto
+- Auth con JWT
+- 3 tablas, guest, user, deparment
+- Relacion de uno a muchos en department a guest
+- validacion de errores
+- Swagger documentation
+
+
 Abajo los pasos para la instalación del proyecto
 
 
