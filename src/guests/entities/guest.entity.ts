@@ -36,6 +36,7 @@ export class Guest {
   @ManyToOne(() => Department, (department) => department.guests, {
     nullable: false,
     cascade: true,
+    eager: true,
   })
   @JoinColumn({ name: 'departmentId' })
   department: Department;
