@@ -23,7 +23,7 @@
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
 ## Descripción
-La base de datos esta en los archivos como "guests_project.sql"
+Crear una base de dato y nombrarla asi "guests_project" e importar ahi el archivo sql que esta en los archivos como "guests_project.sql"
 
 Para configurar el puerto, las credenciales y el nombre de la base de datos está el archivo "src/dbConection.ts"
 
