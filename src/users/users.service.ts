@@ -55,7 +55,7 @@ export class UsersService {
     return this.usersRepository.update(data, updateUserDto);
   }
 
-  remove(id: number) {
+  async remove(id: number) {
     const data = await this.usersRepository.findOne({ where: { id } });
 
     if (!data) {
@@ -69,6 +69,5 @@ export class UsersService {
       );
     }
     return this.usersRepository.delete(id);
-  }
   }
 }
