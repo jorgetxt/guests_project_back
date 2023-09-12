@@ -26,6 +26,8 @@
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
+La Base de datos esta en los archivos como "guest_project.sql"
+
 ## Installation
 
 ```bash
