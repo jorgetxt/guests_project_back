@@ -26,7 +26,9 @@
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
-La Base de datos esta en los archivos como "guest_project.sql"
+La base de datos esta en los archivos como "guest_project.sql"
+
+Para configurar la conexión las credenciales y el nombre de la base de datos esta el archivo "src/dbConection.ts"
 
 ## Installation
 
