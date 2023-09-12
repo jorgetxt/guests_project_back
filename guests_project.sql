@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 12, 2023 at 02:32 PM
+-- Generation Time: Sep 12, 2023 at 06:16 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -66,18 +66,9 @@ CREATE TABLE `guest` (
 --
 
 INSERT INTO `guest` (`id`, `date`, `status`, `firstname`, `lastname`, `cedula`, `registerDate`, `reason`, `note`, `departmentId`) VALUES
-(2, '2023-09-11 15:39:07', 'Finalizado', 'Luis', ' Morales', '094357986', '2023-09-11 15:39:07', 'Motivo', 'Un suceso', 1),
-(3, '2023-09-05 00:00:00', 'En curso', 'Sara', 'Rodriguez', '0927386987', '2023-09-11 15:56:22', 'info', 'una novedad', 1),
-(4, '2023-09-20 00:00:00', 'En curso', 'Tania', 'Loreto', '0923455456', '2023-09-11 20:15:15', 'informacion', '', 1),
-(5, '2023-09-19 00:00:00', 'En curso', 'jorge', 'Rodriguez', '0927386987', '2023-09-11 20:17:48', 'refr', '', 1),
-(6, '2023-09-21 00:00:00', 'En curso', 'Ramiro', 'Sanchez', '0923455456', '2023-09-11 20:19:50', 'info', '', 1),
-(7, '2023-09-22 00:00:00', 'Finalizado', 'jorge', 'Rodriguez', '0927386987', '2023-09-11 20:36:20', 'info', '', 1),
-(8, '2023-09-11 18:17:32', 'test', 'Luis', ' Morales', '094357986', '2023-09-11 18:17:32', 'Motivo', 'Test', 1),
-(9, '2023-09-21 00:00:00', 'Finalizado', 'Carlota', 'Rodriguez', '9898398434', '2023-09-11 20:45:01', 'informacion', '', 1),
-(10, '2023-09-16 00:00:00', 'Finalizado', 'Carlota', 'hidalgo', '9898398439', '2023-09-11 20:48:34', 'informacion', '', 1),
-(11, '2023-09-08 00:00:00', 'Finalizado', 'Ramiro', 'hi', '0923455456', '2023-09-11 21:57:29', 'info', 'Novedad', 1),
-(12, '2023-09-12 05:33:33', 'test', 'Luisa', ' Navarro', '094357986', '2023-09-12 05:33:33', 'Motivo', 'Test', 2),
-(13, '2023-09-14 00:00:00', 'En curso', 'Camila', 'Montero', '1234567834', '2023-09-12 05:52:19', 'info', '', 1);
+(1, '2023-09-14 00:00:00', 'En curso', 'Sara', 'Rodriguez', '0927386987', '2023-09-12 11:11:25', 'informacion', '', 2),
+(2, '2023-09-14 00:00:00', 'En curso', 'Ramiro', 'Loreto', '0923455456', '2023-09-12 11:12:05', 'informacion', '', 2),
+(3, '2023-09-14 00:00:00', 'Finalizado', 'Tania', 'Soto', '0927386923', '2023-09-12 11:12:28', 'Visita', 'Novedad', 1);
 
 -- --------------------------------------------------------
 
@@ -115,6 +106,7 @@ ALTER TABLE `department`
 --
 ALTER TABLE `guest`
   ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `IDX_3284044c59d4cfef0edd4ecd48` (`cedula`),
   ADD KEY `FK_9f3712f58ce9960c92fcb8cef3d` (`departmentId`);
 
 --
@@ -138,7 +130,7 @@ ALTER TABLE `department`
 -- AUTO_INCREMENT for table `guest`
 --
 ALTER TABLE `guest`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `user`
