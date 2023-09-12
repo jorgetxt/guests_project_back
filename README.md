@@ -22,13 +22,13 @@
   <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-## Description
+## Descripción
+La base de datos esta en los archivos como "guests_project.sql"
+
+Para configurar la conexión las credenciales y el nombre de la base de datos esta el archivo "src/dbConection.ts"
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
-La base de datos esta en los archivos como "guest_project.sql"
-
-Para configurar la conexión las credenciales y el nombre de la base de datos esta el archivo "src/dbConection.ts"
 
 ## Installation
 
