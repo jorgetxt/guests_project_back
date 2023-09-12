@@ -56,6 +56,19 @@ export class UsersService {
   }
 
   remove(id: number) {
-    return `This action removes a #${id} user`;
+    const data = await this.usersRepository.findOne({ where: { id } });
+
+    if (!data) {
+      throw new HttpException(
+        {
+          statusCode: HttpStatus.FORBIDDEN,
+          error: 'FORBIDDEN',
+          message: ['no se encontró usuario'],
+        },
+        HttpStatus.FORBIDDEN,
+      );
+    }
+    return this.usersRepository.delete(id);
+  }
   }
 }

@@ -29,6 +29,22 @@ export class GuestsService {
         HttpStatus.FORBIDDEN,
       );
     }
+
+    const cedula = await this.guestRepository.findOne({
+      where: { cedula: createGuestDto.cedula },
+    });
+
+    if (cedula) {
+      throw new HttpException(
+        {
+          statusCode: HttpStatus.FORBIDDEN,
+          error: 'FORBIDDEN',
+          message: ['Cedula ya existe'],
+        },
+        HttpStatus.FORBIDDEN,
+      );
+    }
+
     const data = this.guestRepository.create({ department, ...createGuestDto });
     return this.guestRepository.save(data);
   }
@@ -103,11 +119,11 @@ export class GuestsService {
         {
           statusCode: HttpStatus.FORBIDDEN,
           error: 'FORBIDDEN',
-          message: ['no se encontró tarjeta'],
+          message: ['no se encontró invitado'],
         },
         HttpStatus.FORBIDDEN,
       );
     }
-    return this.guestRepository.softRemove;
+    return this.guestRepository.delete(id);
   }
 }

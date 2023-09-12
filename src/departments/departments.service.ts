@@ -86,11 +86,11 @@ export class DepartmentsService {
         {
           statusCode: HttpStatus.FORBIDDEN,
           error: 'FORBIDDEN',
-          message: ['no se encontró tarjeta'],
+          message: ['no se encontró usuario'],
         },
         HttpStatus.FORBIDDEN,
       );
     }
-    return this.departmentRepository.softRemove;
+    return this.departmentRepository.delete(id);
   }
 }

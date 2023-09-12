@@ -24,7 +24,7 @@ export class Guest {
   @Column()
   lastname: string;
 
-  @Column()
+  @Column({ unique: true })
   cedula: string;
 
   @Column()
