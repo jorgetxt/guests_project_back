@@ -5,6 +5,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Guest } from './entities/guest.entity';
 import { Repository } from 'typeorm';
 import { Department } from 'src/departments/entities/department.entity';
+import { ListResponse } from 'src/auth/schemas/listResponse.schema';
 
 @Injectable()
 export class GuestsService {
@@ -49,8 +50,13 @@ export class GuestsService {
     return this.guestRepository.save(data);
   }
 
-  findAll() {
-    return this.guestRepository.find();
+  async findAll(query: ListResponse<Guest>): Promise<Guest[]> {
+    const data = await this.guestRepository.find({
+      skip: query.page,
+      take: query.perPage,
+      where: { [query.key]: query.keyword },
+    });
+    return data;
   }
 
   async findOne(id: number) {

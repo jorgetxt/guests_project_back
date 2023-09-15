@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
   UseGuards,
+  Query,
 } from '@nestjs/common';
 import { GuestsService } from './guests.service';
 import { CreateGuestDto } from './dto/create-guest.dto';
@@ -20,6 +21,8 @@ import {
 } from '@nestjs/swagger/dist/decorators';
 import { bodyCreateSWG, okResponseCreateSWG } from './swagger/create.swagger';
 import { bodyUpdateSWG, okResponseUpdateSWG } from './swagger/update.swagger';
+import { Query as ExpressQuery } from 'express-serve-static-core';
+import { Guest } from './entities/guest.entity';
 
 @UseGuards(JwtAuthGuard)
 @ApiBearerAuth()
@@ -36,8 +39,8 @@ export class GuestsController {
   }
 
   @Get()
-  findAll() {
-    return this.guestsService.findAll();
+  async findAll(@Query() query: ExpressQuery): Promise<Guest[]> {
+    return this.guestsService.findAll(query);
   }
 
   @Get(':id')
