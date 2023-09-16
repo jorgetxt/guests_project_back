@@ -51,12 +51,25 @@ export class GuestsService {
   }
 
   async findAll(query: ListResponse<Guest>): Promise<Guest[]> {
-    const data = await this.guestRepository.find({
-      skip: query.page,
-      take: query.perPage,
-      where: { [query.key]: query.keyword },
-    });
-    return data;
+    console.log(query);
+
+    try {
+      const data = await this.guestRepository.find({
+        skip: query?.page,
+        take: query?.perPage,
+        ...(query?.key && { where: { [query.key]: query.keyword } }),
+      });
+      return data;
+    } catch (error) {
+      throw new HttpException(
+        {
+          statusCode: HttpStatus.BAD_REQUEST,
+          error: 'BAD_REQUEST',
+          message: ['Ha ocurrido un error', error],
+        },
+        HttpStatus.BAD_REQUEST,
+      );
+    }
   }
 
   async findOne(id: number) {

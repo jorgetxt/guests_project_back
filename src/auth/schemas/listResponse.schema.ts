@@ -1,3 +1,4 @@
+// export interface ListResponse {
 export interface ListResponse<T> {
   perPage?: number;
   page?: number;

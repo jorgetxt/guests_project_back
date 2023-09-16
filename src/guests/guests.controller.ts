@@ -21,7 +21,6 @@ import {
 } from '@nestjs/swagger/dist/decorators';
 import { bodyCreateSWG, okResponseCreateSWG } from './swagger/create.swagger';
 import { bodyUpdateSWG, okResponseUpdateSWG } from './swagger/update.swagger';
-import { Query as ExpressQuery } from 'express-serve-static-core';
 import { Guest } from './entities/guest.entity';
 
 @UseGuards(JwtAuthGuard)
@@ -39,8 +38,14 @@ export class GuestsController {
   }
 
   @Get()
-  async findAll(@Query() query: ExpressQuery): Promise<Guest[]> {
-    return this.guestsService.findAll(query);
+  async findAll(
+    @Query('page') page: number,
+    @Query('perPage') perPage: number,
+    @Query('key') key: keyof Guest,
+    @Query('keyword') keyword: string,
+  ): Promise<Guest[]> {
+    console.log(page, perPage);
+    return this.guestsService.findAll({ page, perPage, key, keyword });
   }
 
   @Get(':id')
