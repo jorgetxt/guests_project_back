@@ -3,9 +3,12 @@ import { CreateGuestDto } from './dto/create-guest.dto';
 import { UpdateGuestDto } from './dto/update-guest.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Guest } from './entities/guest.entity';
-import { Repository } from 'typeorm';
+import { ILike, Repository } from 'typeorm';
 import { Department } from 'src/departments/entities/department.entity';
-import { ListResponse } from 'src/auth/schemas/listResponse.schema';
+import {
+  ListResponse,
+  ListResponseInfo,
+} from 'src/auth/schemas/listResponse.schema';
 
 @Injectable()
 export class GuestsService {
@@ -50,16 +53,41 @@ export class GuestsService {
     return this.guestRepository.save(data);
   }
 
-  async findAll(query: ListResponse<Guest>): Promise<Guest[]> {
-    console.log(query);
-
+  async findAll({
+    key = 'date',
+    keyword,
+    page = 1,
+    perPage,
+    order = 'ASC',
+  }: ListResponseInfo<Guest>): Promise<ListResponse<Guest>> {
     try {
-      const data = await this.guestRepository.find({
-        skip: query?.page,
-        take: query?.perPage,
-        ...(query?.key && { where: { [query.key]: query.keyword } }),
+      const [data, count] = await this.guestRepository.findAndCount({
+        order: { [key]: order },
+        skip: page - 1,
+        take: perPage,
+        ...(keyword && {
+          where: [
+            { firstname: ILike('%' + keyword + '%') },
+            { lastname: ILike('%' + keyword + '%') },
+            { cedula: ILike('%' + keyword + '%') },
+            { status: ILike('%' + keyword + '%') },
+            { reason: ILike('%' + keyword + '%') },
+            { note: ILike('%' + keyword + '%') },
+          ],
+        }),
       });
-      return data;
+
+      return {
+        data,
+        info: {
+          page,
+          perPage,
+          key,
+          keyword,
+          order,
+          total: count,
+        },
+      };
     } catch (error) {
       throw new HttpException(
         {

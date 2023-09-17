@@ -22,6 +22,8 @@ import {
 import { bodyCreateSWG, okResponseCreateSWG } from './swagger/create.swagger';
 import { bodyUpdateSWG, okResponseUpdateSWG } from './swagger/update.swagger';
 import { Guest } from './entities/guest.entity';
+import { ListResponse } from 'src/auth/schemas/listResponse.schema';
+import { FindOptionsOrderValue } from 'typeorm';
 
 @UseGuards(JwtAuthGuard)
 @ApiBearerAuth()
@@ -43,9 +45,9 @@ export class GuestsController {
     @Query('perPage') perPage: number,
     @Query('key') key: keyof Guest,
     @Query('keyword') keyword: string,
-  ): Promise<Guest[]> {
-    console.log(page, perPage);
-    return this.guestsService.findAll({ page, perPage, key, keyword });
+    @Query('order') order: FindOptionsOrderValue,
+  ): Promise<ListResponse<Guest>> {
+    return this.guestsService.findAll({ page, perPage, key, keyword, order });
   }
 
   @Get(':id')
