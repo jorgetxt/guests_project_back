@@ -62,9 +62,9 @@ export class AuthService {
 
     const findUser = await this.usersRepository
       .createQueryBuilder()
-      .addSelect('user.password AS User_password')
-      .where('user.username = :username', { username })
-      .select()
+      .where(`User.username = :username`, { username })
+      .addSelect('User.password AS User_password')
+      // .addSelect(`user.password AS User_password`)
       .getOne();
 
     if (!findUser) {
