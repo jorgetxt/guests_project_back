@@ -19,8 +19,10 @@ import {
   ApiOkResponse,
 } from '@nestjs/swagger/dist/decorators';
 import { bodyCreateSWG, okResponseCreateSWG } from './swagger/create.swagger';
+import { RolesGuard } from 'src/auth/guards/roles.guard';
+import { Roles } from 'src/auth/decorators/roles.decorator';
 
-@UseGuards(JwtAuthGuard)
+@UseGuards(JwtAuthGuard, RolesGuard)
 @ApiBearerAuth()
 @ApiTags('Departamentos')
 @Controller('departments')
@@ -35,6 +37,7 @@ export class DepartmentsController {
   }
 
   @Get()
+  @Roles(['supervisor'])
   findAll() {
     return this.departmentsService.findAll();
   }

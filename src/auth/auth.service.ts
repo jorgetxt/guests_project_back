@@ -91,7 +91,11 @@ export class AuthService {
       );
     }
 
-    const payload = { name: findUser.username, roll: findUser.roll };
+    const payload = {
+      id: findUser.id,
+      username: findUser.username,
+      roll: findUser.roll,
+    };
 
     const token = this.jwtService.sign(payload);
 
