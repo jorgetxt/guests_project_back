@@ -28,4 +28,4 @@ export const conectionRemote = TypeOrmModule.forRoot({
   synchronize: true,
 });
 
-export default conection;
+export default conectionRemote;
